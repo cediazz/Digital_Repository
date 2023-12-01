@@ -31,19 +31,20 @@
       </symbol>
     </svg>
  <main class="form-signin w-100 m-auto  ">
-  <form>
+  <form method="post" >
+    {% csrf_token %}
     <div class="d-flex justify-content-center align-items-center">
-      <img class="mb-4 " src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+      <img class="mb-4 " src="" alt="" width="72" height="57">
     </div>
     <h1 class="h3 mb-3 fw-normal text-center">Please sign in</h1>
-
     <div class="form-floating">
-      <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-      <label for="floatingInput">Email address</label>
+       {{ form.username }} 
+      {{ form.username.label_tag }}
+      
     </div>
     <div class="form-floating">
-      <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-      <label for="floatingPassword">Password</label>
+      {{ form.password }} 
+      {{ form.password.label_tag }}
     </div>
     <div class="form-check text-start my-3 d-flex justify-content-center align-items-center ">
       <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">
@@ -54,8 +55,15 @@
     <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
     <p class="mt-5 mb-3 text-body-secondary  text-center">&copy; 2017–2023</p>
   </form>
+  {% if form.errors %}
+  <div class="alert alert-danger" role="alert">
+  <ul>
+      {% for error in form.non_field_errors %}
+        <li style="color: red;">{{ error }}</li>
+      {% endfor %}
+  </ul>
+</div> 
+  {% endif %}
 </main>
-<script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
-
-    </body>
+</body>
 </html>

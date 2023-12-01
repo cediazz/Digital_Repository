@@ -1,6 +1,8 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 
-def saludo(request):
+@login_required
+def home(request):
     dic = {'saludo':"Hola"}
 
-    return render(request,'Prueba.html',dic)
+    return render(request,'Home.html',dic)
