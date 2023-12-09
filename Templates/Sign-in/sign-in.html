@@ -57,13 +57,16 @@
   </form>
   {% if form.errors %}
   <div class="alert alert-danger" role="alert">
-  <ul>
-      {% for error in form.non_field_errors %}
-        <li style="color: red;">{{ error }}</li>
+    <strong>Errores:</strong>
+    <ul>
+      {% for field, errors in form.errors.items %}
+        {% for error in errors %}
+          <li>{{ error|escape }}</li>
+        {% endfor %}
       {% endfor %}
-  </ul>
-</div> 
-  {% endif %}
+    </ul>
+  </div>
+{% endif %}
 </main>
 </body>
 </html>
