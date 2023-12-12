@@ -10,16 +10,16 @@ class UserPasswordChangeForm(PasswordChangeForm):
         label=("Password actual"),
         strip=False,
         widget=forms.PasswordInput(
-            attrs={"autocomplete": "current-password", "autofocus": True}
+            attrs={'class': 'form-control', 'id': 'floatingPassword',"autocomplete": "current-password", "autofocus": True}
         ),
     )
     new_password1 = forms.CharField(
         label=("Nuevo Password"),
-        widget=forms.PasswordInput(attrs={"autocomplete": "new-password"}),
+        widget=forms.PasswordInput(attrs={'class': 'form-control', 'id': 'floatingPassword',"autocomplete": "new-password"}),
         strip=False,
     )
     new_password2 = forms.CharField(
         label=("Nuevo Password Confirmación"),
         strip=False,
-        widget=forms.PasswordInput(attrs={"autocomplete": "new-password"}),
+        widget=forms.PasswordInput(attrs={'class': 'form-control', 'id': 'floatingPassword',"autocomplete": "new-password"}),
     )
