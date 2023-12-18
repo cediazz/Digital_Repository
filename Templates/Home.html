@@ -18,7 +18,7 @@
         </a>
 
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-          <li><a href="{% url 'home' %}" class="nav-link px-2 link-body-emphasis">Página Principal</a></li>
+          <li><a href="{% url 'home' %}" class="nav-link px-2 link-body-emphasis">Home</a></li>
           <li><a href="#" class="nav-link px-2 link-body-emphasis">Inventory</a></li>
           <li><a href="#" class="nav-link px-2 link-body-emphasis">Customers</a></li>
           <li><a href="#" class="nav-link px-2 link-body-emphasis">Products</a></li>
@@ -30,7 +30,7 @@
 
         <div class="dropdown text-end">
           <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="{{user.image.url}}" alt="mdo" width="42" height="42" class="rounded-circle">
+            <img src="{{user.image.url}}" width="42" height="42" class="rounded-circle">
             {{user.username}}
           </a>
           <ul class="dropdown-menu text-small">

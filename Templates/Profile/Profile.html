@@ -3,16 +3,44 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <title>Title</title>
+    <title>Perfil</title>
     {% load bootstrap5 %} {% bootstrap_css %} {% bootstrap_javascript %}
-  </head>
+    </head>
   <body>
     {% block content %} 
-  <main class="form-signin w-100 m-auto d-flex justify-content-center align-items-center py-4  ">
-      <img src="{{user.image.url}}">
-      {{form.username}}
-      {{form.image}}
+  <main class="container py-4">
+    <form class="row g-3 " method="post"  enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="col-md-4 d-flex justify-content-center align-items-center">
+        <a href="{{user.image.url}}" class="mr-5"><img src="{{user.image.url}}" width="200" height="200" class="rounded-circle"></a>
+      </div>
+      <div class="col-md-5">
+        <div class="mb-3"> 
+         <label for="username" class="form-label">Nombre de Usuario</label>
+         {{form.username}}
+        </div>
+        <div class="mb-3">
+         <label for="image" class="form-label">Seleccionar Imagen</label>
+         {{form.image}}
+        </div>
+        <button class="btn btn-primary" type="submit">Guardar</button>
+      </div>
+    </form>
   </main>
+  <div class=" d-flex justify-content-center py-4"> 
+    {% if form.errors %}
+      <div class="alert alert-danger" role="alert">
+        <strong>Errores:</strong>
+        <ul>
+          {% for field, errors in form.errors.items %} 
+          {% for error in errors %}
+          <li>{{ error|escape }}</li>
+          {% endfor %} 
+          {% endfor %}
+        </ul>
+      </div>
+     {% endif %}
+    </div>
 {% endblock %}
   </body>
 </html>

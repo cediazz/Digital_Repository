@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+    {% load bootstrap5 %} {% bootstrap_css %} {% bootstrap_javascript %}
+    <link rel="stylesheet" type="text/css" href="{% static 'sign-in.css' %}">
+  </head>
+  <body>
+    {% block content %} 
+  <main class="form-signin w-100 m-auto d-flex justify-content-center align-items-center py-4">
+    <form  method="post"  enctype="multipart/form-data">
+      {% csrf_token %}
+      <h1 class="h3 mb-3 fw-normal text-center">Registro de Usuario</h1>
+        <div class="mb-2">
+          <label for="username" class="form-label">Nombre de Usuario</label>  
+          {{form.username}}
+        </div>
+        <div class="mb-2">
+          <label for="password1" class="form-label">Password</label>  
+          {{form.password1}}
+        </div>
+        <div class="mb-2">
+          <label for="password2" class="form-label">Password Confirmación</label>  
+          {{form.password2}}
+        </div>
+        <div class="mb-2">
+          <label for="image" class="form-label">Imagen</label>  
+          {{form.image}}
+        </div>
+      <button class="btn btn-primary w-100 mt-3 py-2" type="submit">Aceptar</button>
+ </form>
+  </main>
+  <div class=" d-flex justify-content-center py-4"> 
+    {% if form.errors %}
+      <div class="alert alert-danger" role="alert">
+        <strong>Errores:</strong>
+        <ul>
+          {% for field, errors in form.errors.items %} 
+          {% for error in errors %}
+          <li>{{ error|escape }}</li>
+          {% endfor %} 
+          {% endfor %}
+        </ul>
+      </div>
+     {% endif %}
+    </div>
+{% endblock %}
+  </body>
+</html>
+

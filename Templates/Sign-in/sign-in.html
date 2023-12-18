@@ -1,6 +1,6 @@
 {% load static %}
 <!doctype html>
-<html lang="en" data-bs-theme="auto">
+<html lang="es" data-bs-theme="auto">
   <head>
     {% load bootstrap5 %}
     {% bootstrap_css %}
@@ -46,15 +46,15 @@
       {{ form.password }} 
       {{ form.password.label_tag }}
     </div>
-    <div class="form-check text-start my-3 d-flex justify-content-center align-items-center ">
-      <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">
-      <label class="form-check-label" for="flexCheckDefault">
-        Remember me
-      </label>
+    <div class="text-start my-3 d-flex justify-content-center align-items-center ">
+      <a href="{% url 'insert-user' %}" style="text-decoration: none;">Registrese Aqui </a>
     </div>
     <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
     <p class="mt-5 mb-3 text-body-secondary  text-center">&copy; 2017–2023</p>
   </form>
+  <div class="alert alert-danger" role="alert">
+    <strong>{{message}}</strong> 
+  </div>
   {% if form.errors %}
   <div class="alert alert-danger" role="alert">
     <strong>Errores:</strong>
