@@ -33,11 +33,14 @@ class MyUserManager(BaseUserManager):
 
 
 class MyUser(AbstractBaseUser, PermissionsMixin):
-    username = models.CharField(max_length=255,unique=True)
+    username = models.CharField(max_length=15,unique=True)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     image = models.ImageField(upload_to='Users Image', default='Users Image/default-avatar.png')
     objects = MyUserManager()
+
+    class Meta:
+        verbose_name = "usuario"
 
     USERNAME_FIELD = "username"
     REQUIRED_FIELDS = ["password"]

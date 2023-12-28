@@ -5,24 +5,23 @@ from django.contrib.auth.decorators import login_required
 from django.views import View
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
+from .Utils import admin_restriction
+from django.utils.decorators import method_decorator
+
+@method_decorator(admin_restriction, name='dispatch')
 class CustomLoginView(LoginView):
     form_class = UserLoginForm
     template_name = 'Sign-in/sign-in.html'
-    extra_context = {'message':'','form':form_class}
+    
 
-    def form_valid(self, form):
-        if self.request.user.is_authenticated and self.request.user.is_superuser:
-            # Si el usuario autenticado es un administrador, redirige a la página de inicio
-            self.extra_context['message'] = 'No se puede acceder en estos momentos, se esta trabajando en la administración del sistema'
-            return render(self.request,self.template_name, self.extra_context)
-        # Si el usuario autenticado no es un administrador, permite que la vista de inicio de sesión se ejecute normalmente
-        self.extra_context['message'] = ''
-        return super().form_valid(form)
-
+@method_decorator(login_required, name='dispatch')    
+@method_decorator(admin_restriction, name='dispatch')
 class CustomPasswordChangeView(PasswordChangeView):
     form_class = UserPasswordChangeForm
     template_name = 'Password/Password.html'
 
+@method_decorator(login_required, name='dispatch')
+@method_decorator(admin_restriction, name='dispatch')
 class CustomPasswordChangeDoneView(PasswordChangeDoneView):
     template_name = 'Password/PasswordDone.html'
     
@@ -31,6 +30,8 @@ class CustomPasswordChangeDoneView(PasswordChangeDoneView):
         context['message'] = "¡Tu contraseña ha sido cambiada con éxito!"
         return context
 
+@method_decorator(login_required, name='dispatch')
+@method_decorator(admin_restriction, name='dispatch')
 class UserUpdateView(View):
     template_name = 'Profile/Profile.html'
 
@@ -46,6 +47,7 @@ class UserUpdateView(View):
        return render(request, self.template_name, {'form': form})
 
 
+@method_decorator(admin_restriction, name='dispatch')
 class UserCreateView(View):
     template_name = 'InsertUser/InsertUser.html'
 
@@ -55,7 +57,6 @@ class UserCreateView(View):
     
     def post(self, request):
        form = UserCreateForm(request.POST, request.FILES)
-       print(request.FILES)
        if form.is_valid():
             user = form.save()
             username = form.cleaned_data['username']

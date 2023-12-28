@@ -3,8 +3,8 @@ from django.contrib.auth.forms import AuthenticationForm,PasswordChangeForm,User
 from .models import MyUser
 
 class UserLoginForm(AuthenticationForm):
-    username = forms.CharField(label=("nombre de usuario"),widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'floatingInput', 'name':'username', 'placeholder':'Nombre de usuario'}))
-    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'id': 'floatingPassword','name':'password', 'placeholder':'Password'}))
+    username = forms.CharField(label=("nombre de usuario"),widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'floatingInput'}),max_length=15)
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'id': 'floatingPassword'}))
 
 class UserPasswordChangeForm(PasswordChangeForm):
     old_password = forms.CharField(
@@ -28,7 +28,7 @@ class UserUpdateForm(UserChangeForm):
         fields = ('username', 'image')
     def __init__(self, *args, **kwargs):
         super(UserUpdateForm, self).__init__(*args, **kwargs)
-        self.fields['username'].widget = forms.TextInput(attrs={'class': 'form-control','id': 'username'})
+        self.fields['username'] = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'username'}),max_length=15)
         self.fields['image'].widget = forms.FileInput(attrs={'class': 'form-control','id': 'image'})
 
 
@@ -38,7 +38,7 @@ class UserCreateForm(UserCreationForm):
         fields = ('username','image')
     def __init__(self, *args, **kwargs):
         super(UserCreateForm, self).__init__(*args, **kwargs)
-        self.fields['username'].widget = forms.TextInput(attrs={'class': 'form-control','id': 'username'})
+        self.fields['username'] = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'username'}),max_length=15)
         self.fields['password1'].widget = forms.PasswordInput(attrs={'class': 'form-control','id': 'password1'})
         self.fields['password2'].widget = forms.PasswordInput(attrs={'class': 'form-control','id': 'password2'})
         self.fields['image'].widget = forms.FileInput(attrs={'class': 'form-control','id': 'image'})

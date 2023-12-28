@@ -1,0 +1,8 @@
+.container-image-home {
+    width: 100%; /* Ancho de la div */
+    height: 400px; /* Altura de la div */
+    background-image: url('{% static "libros-gafas.jpg" %}');
+    background-size: cover; /* Ajuste del tamaño de la imagen */
+    background-repeat: no-repeat; /* Evita la repetición de la imagen */
+    background-position: center; /* Posiciona la imagen al centro */
+  }

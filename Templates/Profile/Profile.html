@@ -1,14 +1,14 @@
-{% extends 'Home.html' %} {% load static %}
+{% extends 'Menu.html' %} {% load static %}
 <!DOCTYPE html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <title>Perfil</title>
+    <title>Perfil de usuario</title>
     {% load bootstrap5 %} {% bootstrap_css %} {% bootstrap_javascript %}
     </head>
   <body>
     {% block content %} 
-  <main class="container py-4">
+  <main class="container mt-3 py-4">
     <form class="row g-3 " method="post"  enctype="multipart/form-data">
       {% csrf_token %}
       <div class="col-md-4 d-flex justify-content-center align-items-center">

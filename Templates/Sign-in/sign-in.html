@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.118.2">
-    <title>Signin Template · Bootstrap v5.3</title>
+    <title>Autenticación de usuario</title>
     <!-- Custom styles for this template -->
     <link rel="stylesheet" type="text/css" href="{% static 'sign-in.css' %}">
   </head>
@@ -52,9 +52,6 @@
     <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
     <p class="mt-5 mb-3 text-body-secondary  text-center">&copy; 2017–2023</p>
   </form>
-  <div class="alert alert-danger" role="alert">
-    <strong>{{message}}</strong> 
-  </div>
   {% if form.errors %}
   <div class="alert alert-danger" role="alert">
     <strong>Errores:</strong>
