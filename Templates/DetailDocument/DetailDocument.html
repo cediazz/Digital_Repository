@@ -1,0 +1,26 @@
+{% extends 'Menu.html' %}
+{% load static %}
+
+  {% block content %}
+  <div class="container mt-5">
+    <div class="card mb-3" >
+        <div class="row g-0">
+          <div class="col-md-4">
+            <a href="{{document.image.url}}"><img src="{{document.image.url}}" class="img-fluid rounded-start" alt="..."></a>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{document.title}}</h5>
+              <p class="card-text">{{document.description}}</p>
+              <p class="card-text"><small class="text-body-secondary">Autor: {{document.author}}</small></p>
+              <p class="card-text"><small class="text-body-secondary">Temática: {{document.theme}}</small></p>
+              <p class="card-text"><small class="text-body-secondary">Fecha de Publicación: {{document.publication_date}}</small></p>
+              <a href="{{ document.file.url }}" download class="btn btn-primary">Descargar</a>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+  
+  
+  {% endblock %}

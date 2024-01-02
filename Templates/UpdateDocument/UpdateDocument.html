@@ -1,0 +1,66 @@
+{% extends 'Menu.html' %}
+{% load static %}
+
+  {% block content %}
+  <div class="container mt-5">
+    <div class="card mb-3" >
+        <div class="row g-0">
+          <div class="col-md-4">
+            <a href="{{document.image.url}}"><img src="{{document.image.url}}" class="img-fluid rounded-start" alt="..."></a>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+                <form class="row g-3" method="post"  enctype="multipart/form-data">
+                    {% csrf_token %}
+                      <div class="col-md-6">
+                        <label for="title" class="form-label">Título del documento</label>  
+                        {{form.title}}
+                      </div>
+                      <div class="col-md-6">
+                        <label for="author" class="form-label">Autor</label>  
+                        {{form.author}}
+                      </div>
+                      <div class="col-md-12">
+                        <label for="description" class="form-label">Descripción</label>  
+                        {{form.description}}
+                      </div>
+                      <div class="col-md-6">
+                        <label for="theme" class="form-label">Temática</label>  
+                        {{form.theme}}
+                      </div>
+                      <div class="col-md-6">
+                          <label for="file" class="form-label">Fichero</label>  
+                          {{form.file}}
+                        </div>
+                        <div class="col-md-12">
+                            <div class=" d-flex justify-content-center py-4">
+                                {% if message %}
+                                <div class="alert alert-success" role="alert">
+                                  {{message}}
+                                </div>
+                                {% endif %} 
+                                {% if form.errors %}
+                                  <div class="alert alert-danger" role="alert">
+                                    <strong>Errores:</strong>
+                                    <ul>
+                                      {% for field, errors in form.errors.items %} 
+                                      {% for error in errors %}
+                                      <li>{{ error|escape }}</li>
+                                      {% endfor %} 
+                                      {% endfor %}
+                                    </ul>
+                                  </div>
+                                 {% endif %}
+                                </div>
+                          </div>
+                    <button class="btn btn-primary w-100 mt-3 py-2" type="submit">Guardar</button>
+               </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+  </div>
+
+  
+  {% endblock %}

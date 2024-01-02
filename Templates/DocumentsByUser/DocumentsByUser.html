@@ -1,0 +1,54 @@
+{% extends 'Menu.html' %}
+{% load static %}
+
+  {% block content %}
+<div class="container mt-5">
+  <div class="container-fluid ">
+      <h2 class="pb-2 border-bottom fw-bold ">Mis documentos</h2>
+      <div class="row mt-3 row-cols-1 row-cols-md-3 g-4">
+        {% for doc in documents_paginated %}
+         <div class="col">
+          <div class="card " style="width: 18rem;">
+            <a href="{{doc.image.url}}"><img src="{{doc.image.url}}" height="300" class="card-img-top" alt="..."></a>
+            <div class="card-body ">
+              <h5 class="card-title fw-bold">{{doc.title}}</h5>
+              <a href="{% url 'document-update' pk=doc.id %}" class="btn btn-primary">Editar</a>
+            </div>
+          </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    <nav class="mt-3" aria-label="Page navigation example">
+      {% if documents_paginated.has_other_pages %}
+      <ul class="pagination justify-content-center">
+        {% if documents_paginated.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page={{ documents_paginated.previous_page_number }}"><span aria-hidden="true">&laquo;</span></a></li>
+          {% else %}
+            <li class="page-item disabled"><span class="page-link"><span aria-hidden="true">&laquo;</span></span></li>
+          {% endif %}
+        {% for i in documents_paginated.paginator.page_range %}
+        {% if i == documents_paginated.number %}
+          <li class="page-item active" aria-current="page"><a class="page-link" href="#">{{ i }}</a></li>
+        {% elif i > documents_paginated.number|add:"-3" and i < documents_paginated.number|add:"3" %}
+          <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+        {% elif i == documents_paginated.paginator.page_range.0 %}
+          <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+          <li class="page-item disabled"><span class="page-link">...</span></li>
+        {% elif i == documents_paginated.paginator.page_range|last %}
+          <li class="page-item disabled"><span class="page-link">...</span></li>
+          <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+        {% endif %}
+          {% endfor %}
+        {% if documents_paginated.has_next %}
+          <li class="page-item"><a class="page-link" href="?page={{ documents_paginated.next_page_number }}"><span aria-hidden="true">&raquo;</span></a></li>
+        {% else %}
+          <li class="page-item disabled"><span class="page-link"><span aria-hidden="true">&raquo;</span></span></li>
+        {% endif %}
+      </ul>
+      {% endif %}
+    </nav>
+  </div>
+  
+  
+  {% endblock %}

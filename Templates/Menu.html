@@ -32,7 +32,8 @@
           {{user.username}}
         </a>
         <ul class="dropdown-menu text-small">
-          <li><a class="dropdown-item " href="{% url 'documents' %}">Gestionar Documentos</a></li>
+          <li><a class="dropdown-item " href="{% url 'documents-byuser' %}">Mis documentos</a></li>
+          <li><a class="dropdown-item " href="{% url 'documents' %}">Guardar Documento</a></li>
           <li><a class="dropdown-item " href="{% url 'change-password' %}" >Cambiar contraseña</a></li>
           <li><a class="dropdown-item" href="{% url 'profile' %}">Perfil</a></li>
           <li><hr class="dropdown-divider"></li>

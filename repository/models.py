@@ -7,8 +7,9 @@ class Document(models.Model):
     description = models.TextField()
     publication_date = models.DateField(auto_now=True)
     author = models.CharField(max_length=255)
-    key_words = models.CharField(max_length=255)
+    theme = models.CharField(max_length=255)
     file = models.FileField(upload_to='Documents/', blank=False, validators=[validate_file_extension])
+    image = models.ImageField(upload_to='Documents/')
     user = models.ForeignKey(MyUser, on_delete=models.PROTECT)
     
     class Meta:
