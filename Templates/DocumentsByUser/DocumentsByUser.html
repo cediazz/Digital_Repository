@@ -12,9 +12,38 @@
             <a href="{{doc.image.url}}"><img src="{{doc.image.url}}" height="300" class="card-img-top" alt="..."></a>
             <div class="card-body ">
               <h5 class="card-title fw-bold">{{doc.title}}</h5>
-              <a href="{% url 'document-update' pk=doc.id %}" class="btn btn-primary">Editar</a>
+              <div class="row">
+                <div class="col-sm-3">
+                 <a href="{% url 'document-update' pk=doc.id %}" class="btn btn-primary">Editar</a>
+                </div>
+                <div class="col-sm-9">
+              
+                <button type="submit" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#Delete-Document-Modal-{{doc.id}}">Eliminar</button>
+              
+            </div>
+            </div>
             </div>
           </div>
+          </div>
+          <div class="modal fade" id="Delete-Document-Modal-{{doc.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <strong class="text-danger"> Esta seguro de eliminar el documento : {{doc.title}} </strong>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                  <form method="post" action="{% url 'document-delete' pk=doc.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                  </form>
+                </div>
+              </div>
+            </div>
           </div>
         {% endfor %}
       </div>
@@ -49,6 +78,9 @@
       {% endif %}
     </nav>
   </div>
+
+  
+  
   
   
   {% endblock %}

@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
-from django.urls import reverse
+from django.urls import reverse,reverse_lazy
 from django.views import View 
-from django.views.generic import ListView, CreateView, DetailView, UpdateView
+from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 from .forms import DocumentForm
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -17,7 +17,7 @@ class DocumentListViewByUser(LoginRequiredMixin, ListView):
     items_per_page = 6
 
     def get_queryset(self):
-        documents = Document.objects.filter(user=self.request.user)
+        documents = Document.objects.filter(user=self.request.user).order_by('publication_date')
         # Paginar los resultados
         paginator = Paginator(documents, self.items_per_page)
         page_number = self.request.GET.get('page')
@@ -48,6 +48,7 @@ class DocumentCreateView(CreateView):
         document.save() # Guardar el documento actualizado con la imagen
         return render(self.request, self.template_name, {'form': form, 'message': 'Se guardó el documento exitosamente'})
 
+@method_decorator(login_required, name='dispatch')
 class DocumentUpdateView(UpdateView):
     model = Document
     form_class = DocumentForm
@@ -59,4 +60,14 @@ class DocumentUpdateView(UpdateView):
         """El método reverse en Django se utiliza para obtener la URL a partir del nombre de la vista y 
         los parámetros opcionales.El método reverse, en este caso, devolverá la URL respectiva para la 
         vista 'document-update' con el parámetro 'pk' del objeto actual."""
+    
+
+@method_decorator(login_required, name='dispatch')
+class DocumentDeleteView(DeleteView):
+    model = Document
+    template_name = 'DocumentsByUser/DocumentsByUser.html'
+    success_url = reverse_lazy('documents-byuser')
+    
+    
+    
     
