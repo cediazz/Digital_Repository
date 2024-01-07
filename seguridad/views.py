@@ -7,6 +7,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from .Utils import admin_restriction
 from django.utils.decorators import method_decorator
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 @method_decorator(admin_restriction, name='dispatch')
 class CustomLoginView(LoginView):
@@ -14,15 +15,15 @@ class CustomLoginView(LoginView):
     template_name = 'Sign-in/sign-in.html'
     
 
-@method_decorator(login_required, name='dispatch')    
+
 @method_decorator(admin_restriction, name='dispatch')
-class CustomPasswordChangeView(PasswordChangeView):
+class CustomPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
     form_class = UserPasswordChangeForm
     template_name = 'Password/Password.html'
 
-@method_decorator(login_required, name='dispatch')
+
 @method_decorator(admin_restriction, name='dispatch')
-class CustomPasswordChangeDoneView(PasswordChangeDoneView):
+class CustomPasswordChangeDoneView(LoginRequiredMixin,PasswordChangeDoneView):
     template_name = 'Password/PasswordDone.html'
     
     def get_context_data(self, **kwargs):
@@ -30,9 +31,9 @@ class CustomPasswordChangeDoneView(PasswordChangeDoneView):
         context['message'] = "¡Tu contraseña ha sido cambiada con éxito!"
         return context
 
-@method_decorator(login_required, name='dispatch')
+
 @method_decorator(admin_restriction, name='dispatch')
-class UserUpdateView(View):
+class UserUpdateView(LoginRequiredMixin,View):
     template_name = 'Profile/Profile.html'
 
     def get(self, request):

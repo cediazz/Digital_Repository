@@ -5,12 +5,13 @@
   <div class="container">
     <div class="p-5  bg-body-tertiary rounded-3" >
       <div class="container-fluid py-5">
-        <h1 class="display-5 fw-bold">Repositorio Digital</h1>
+        <h1 class="display-5 fw-bold">Repositorio Digital de Documentos</h1>
         <p class="col-md-8 fs-4">Guarde o descarge todo tipo de documentos en formato PDF</p>
-        <form>
-        <div class="row g-3">
+        <form method="get" action="{% url 'home' %}">
+          {% csrf_token %}
+          <div class="row g-3">
           <div class="col">
-            <input class="form-control" type="text" placeholder="Buscar documento">
+            <input class="form-control" type="text" name="title" placeholder="Título del documento">
           </div>
           <div class="col">
             <button class="btn btn-primary" type="submit">Buscar</button>

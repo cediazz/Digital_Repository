@@ -10,19 +10,36 @@ import os.path
 from .Utils import save_image_pdf
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
+
 class DocumentListViewByUser(LoginRequiredMixin, ListView):
     model = Document
     template_name = 'DocumentsByUser/DocumentsByUser.html'
     context_object_name = 'documents_paginated'
     items_per_page = 6
 
-    def get_queryset(self):
-        documents = Document.objects.filter(user=self.request.user).order_by('publication_date')
+    def get_queryset(self): # se ejecuta automaticamente al cargar la plantilla html
+        documents = Document.objects.filter(user=self.request.user).order_by('-publication_date')
         # Paginar los resultados
         paginator = Paginator(documents, self.items_per_page)
         page_number = self.request.GET.get('page')
         documents_paginated = paginator.get_page(page_number)
         return documents_paginated
+
+class DocumentListViewByTheme(View):
+    
+    items_per_page = 6
+
+    def get(self, request):
+        themes = Document.objects.values('theme').distinct().order_by('theme')
+        documents_paginated = None
+        if 'theme' in request.GET:
+            documents = Document.objects.filter(theme = request.GET['theme'])
+            paginator = Paginator(documents, self.items_per_page)
+            page_number = self.request.GET.get('page')
+            documents_paginated = paginator.get_page(page_number)
+        return render(request,'DocumentsByTheme/DocumentsByTheme.html', {'themes': themes, 'documents_paginated': documents_paginated} )
+
+
 
 
 class DocumentDetailView(DetailView):
@@ -30,8 +47,8 @@ class DocumentDetailView(DetailView):
     template_name = "DetailDocument/DetailDocument.html"
     context_object_name = 'document'
 
-@method_decorator(login_required, name='dispatch')
-class DocumentCreateView(CreateView):
+
+class DocumentCreateView(LoginRequiredMixin,CreateView):
     #model = Document
     form_class = DocumentForm
     template_name = 'Documents/Documents.html'  # Nombre del template que contendrá el formulario para crear un nuevo documento
@@ -48,8 +65,8 @@ class DocumentCreateView(CreateView):
         document.save() # Guardar el documento actualizado con la imagen
         return render(self.request, self.template_name, {'form': form, 'message': 'Se guardó el documento exitosamente'})
 
-@method_decorator(login_required, name='dispatch')
-class DocumentUpdateView(UpdateView):
+
+class DocumentUpdateView(LoginRequiredMixin,UpdateView):
     model = Document
     form_class = DocumentForm
     template_name = 'UpdateDocument/UpdateDocument.html'
@@ -62,10 +79,9 @@ class DocumentUpdateView(UpdateView):
         vista 'document-update' con el parámetro 'pk' del objeto actual."""
     
 
-@method_decorator(login_required, name='dispatch')
-class DocumentDeleteView(DeleteView):
+
+class DocumentDeleteView(LoginRequiredMixin,DeleteView):
     model = Document
-    template_name = 'DocumentsByUser/DocumentsByUser.html'
     success_url = reverse_lazy('documents-byuser')
     
     

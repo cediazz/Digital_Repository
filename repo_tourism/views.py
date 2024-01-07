@@ -13,7 +13,11 @@ class Home(View):
    items_per_page = 6
 
    def get(self, request):
-        documents = Document.objects.order_by('publication_date')
+        documents = None
+        if 'title' in request.GET:
+          documents = Document.objects.filter(title__icontains = request.GET['title']).order_by('-publication_date')
+        else:
+         documents = Document.objects.order_by('-publication_date')
         # Paginar los resultados
         paginator = Paginator(documents, self.items_per_page)
         page_number = request.GET.get('page')
