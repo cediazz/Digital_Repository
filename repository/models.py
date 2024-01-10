@@ -6,7 +6,7 @@ import os
 class Document(models.Model):
     title = models.CharField(max_length=255,unique=True,verbose_name='título')
     description = models.TextField()
-    publication_date = models.DateField(auto_now=True)
+    publication_date = models.DateField(auto_now_add=True)
     author = models.CharField(max_length=255)
     theme = models.CharField(max_length=255)
     file = models.FileField(upload_to='Documents/', blank=False, validators=[validate_file_extension])

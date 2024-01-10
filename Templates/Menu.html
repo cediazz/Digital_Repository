@@ -1,35 +1,38 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-bs-theme="dark">
 <head>
    <meta charset="UTF-8">
-    {% load bootstrap5 %}
-    {% bootstrap_css %}
-    {% bootstrap_javascript %}
+   <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'headers.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'home.css' %}">
- 
-  
+  <title>Repositorio</title>
 </head>
 <body>
-  <header class="p-3 shadow-lg  border-bottom border-4 border-primary" style="--bs-border-opacity: .5;">
+  <header class="p-3 bg-body-tertiary">
     <div class="container">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
         <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 link-body-emphasis text-decoration-none">
-          <img src="{{ MEDIA_URL }}Home Image/laptop-libro.jpg" width="42" height="42">
+          <img src="{% static 'icons8-repositorio-azul.png' %}" width="52" height="52">
         </a>
 
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-          <li><a href="{% url 'home' %}" class="nav-link px-2 link-body-emphasis">Página de inicio</a></li>
+          <li><a href="{% url 'home' %}" class="nav-link px-2 link-body-emphasis">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
+              <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z"/>
+            </svg> Página de inicio
+          </a>
+        </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Búsqueda
+            <a class="nav-link dropdown-toggle px-2 link-body-emphasis" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+              </svg> Búsqueda
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="{% url 'document-bytheme' %}">Por temática</a></li>
-              <li><a class="dropdown-item" href="#">AnNother action</a></li>
+              <li><a class="dropdown-item" href="{% url 'document-bytheme' %}">Por Temática</a></li>
+              <li><a class="dropdown-item" href="{% url 'document-byauthor' %}">Por Autor</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
             </ul>
           </li>
         </ul>
@@ -43,20 +46,18 @@
           <li><a class="dropdown-item " href="{% url 'documents-byuser' %}">Mis documentos</a></li>
           <li><a class="dropdown-item " href="{% url 'documents' %}">Guardar Documento</a></li>
           <li><a class="dropdown-item " href="{% url 'change-password' %}" >Cambiar contraseña</a></li>
-          <li><a class="dropdown-item" href="{% url 'profile' %}">Perfil</a></li>
+          <li><a class="dropdown-item" href="{% url 'profile' pk=user.id %}">Perfil</a></li>
           <li><hr class="dropdown-divider"></li>
           <li><a class="dropdown-item" href="{% url 'logout' %}">Salir</a></li>
         </ul>
         {% else %}
-        <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-          Registrese para mas opciones
+        <a href="{% url 'login' %}" class="btn btn-outline-primary">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0z"/>
+            <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
+          </svg> Registrese para mas opciones
         </a>
-        <ul class="dropdown-menu text-small">
-          <li><a class="dropdown-item " href="{% url 'login' %}">Registrarse</a></li>
-          <li><hr class="dropdown-divider"></li>
-          <li><a class="dropdown-item" href="{% url 'logout' %}">Salir</a></li>
-        </ul>
-        {% endif %}  
+      {% endif %}  
         
         </div>
       </div>
@@ -64,6 +65,20 @@
   </header>
     {% block content %}
     {%  endblock  %}
+
+    <div class="container mt-5">
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+      <p class="col-md-4 mb-0 text-body-secondary">&copy; 2023 Repositorio</p>
+  
+      <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+        <img src="{% static 'icons8-repositorio-azul.png' %}" width="52" height="52">
+      </a>
+  
+     
+    </footer>
+  </div>
+
+    <script src="{% static 'bootstrap.bundle.min.js' %}" ></script>
 
 </body>
 </html>

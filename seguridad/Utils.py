@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render
 from repo_tourism.settings import MEDIA_URL
 
 # Decorador que no permite acceder a una vista si hay un administrador logeado

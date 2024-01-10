@@ -5,27 +5,22 @@
   <div class="container">
     <div class="p-5" >
       <div class="container-fluid py-5">
-        <h1 class="display-5 fw-bold">Repositorio Digital de Documentos</h1>
-        <p class="col-md-8 fs-4">Guarde o descarge todo tipo de documentos en formato PDF</p>
-        <form method="get" action="{% url 'home' %}">
+        <p class="col-md-8 fs-4">Escriba el nombre del autor del documento</p>
+        <form method="get" action="{% url 'document-byauthor' %}">
           {% csrf_token %}
           <div class="row g-3">
           <div class="col">
-            <input class="form-control" type="text" name="title" placeholder="Título del documento">
+            <input type="text" class="form-control" name="author" required>
           </div>
           <div class="col">
-            <button class="btn btn-primary" type="submit">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
-              </svg> Buscar
-            </button>
+            <button class="btn btn-primary" type="submit">Buscar</button>
           </div>
         </div>
       </form>
     </div>
-    
+    {% if documents_paginated|length != 0 %}
     <div class="container-fluid ">
-      <h2 class="pb-2 border-bottom fw-bold ">Envíos recientes</h2>
+      <h2 class="pb-2 border-bottom fw-bold ">Resultados</h2>
       <div class="row mt-3 row-cols-1 row-cols-md-3 g-4">
         {% for doc in documents_paginated %}
          <div class="col">
@@ -70,8 +65,10 @@
       {% endif %}
     </nav>
   </div>
-  
-  
-  {% endblock %}
-
-    
+{% endif %}
+   {% if message %}
+      <div class="alert alert-info d-flex justify-content-center align-items-center" role="alert">
+        {{message}}
+      </div>
+    {% endif %} 
+{% endblock %}

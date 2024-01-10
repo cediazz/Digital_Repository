@@ -1,14 +1,7 @@
 {% extends 'Menu.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Guardar Documento</title>
-    {% load bootstrap5 %} {% bootstrap_css %} {% bootstrap_javascript %}
-    </head>
-  <body>
-    {% block content %} 
+
+{% block content %} 
   <main class=" container py-4">
     <form class="row g-3" method="post"  enctype="multipart/form-data">
       {% csrf_token %}
@@ -57,9 +50,7 @@
      {% endif %}
     </div>
 {% endblock %}
-  </body>
-</html>
 
 
 
-{{form}}
+

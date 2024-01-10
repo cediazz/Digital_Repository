@@ -3,7 +3,7 @@
 
   {% block content %}
   <div class="container">
-    <div class="p-5  bg-body-tertiary rounded-3" >
+    <div class="p-5">
       <div class="container-fluid py-5">
         <p class="col-md-8 fs-4">Seleccione la temática del documento que se desea buscar</p>
         <form method="get" action="{% url 'document-bytheme' %}">
@@ -22,7 +22,7 @@
         </div>
       </form>
     </div>
-    
+  {% if documents_paginated|length != 0 %}
     <div class="container-fluid ">
       <h2 class="pb-2 border-bottom fw-bold ">Resultados</h2>
       <div class="row mt-3 row-cols-1 row-cols-md-3 g-4">
@@ -69,6 +69,5 @@
       {% endif %}
     </nav>
   </div>
-  
-  
-  {% endblock %}
+{% endif %}
+{% endblock %}

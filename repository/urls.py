@@ -1,8 +1,11 @@
 from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
-from .views import DocumentCreateView,DocumentListViewByUser,DocumentDetailView,DocumentUpdateView,DocumentDeleteView,DocumentListViewByTheme
-
+from .views.document_delete_view import DocumentDeleteView
+from .views.document_update_view import DocumentUpdateView
+from .views.document_create_view import DocumentCreateView
+from .views.document_detail_view import DocumentDetailView
+from .views.document_list_view import DocumentListViewByUser,DocumentListViewByTheme,DocumentListViewByAuthor
 
 urlpatterns = [
    
@@ -12,6 +15,6 @@ urlpatterns = [
     path('document-update/<int:pk>',DocumentUpdateView.as_view(), name='document-update'),
     path('document-delete/<int:pk>',DocumentDeleteView.as_view(), name='document-delete'),
     path('document-bytheme',DocumentListViewByTheme.as_view(), name='document-bytheme'),
-    
+    path('document-byauthor',DocumentListViewByAuthor.as_view(), name='document-byauthor'),
    
 ]
