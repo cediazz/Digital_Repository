@@ -41,5 +41,5 @@ class UserCreateForm(UserCreationForm):
         self.fields['username'] = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'username'}),max_length=15)
         self.fields['password1'] = forms.CharField(widget= forms.PasswordInput(attrs={'class': 'form-control','id': 'password1'}))
         self.fields['password2'] = forms.CharField(widget= forms.PasswordInput(attrs={'class': 'form-control','id': 'password2'}))
-        self.fields['image'] = forms.ImageField(widget=forms.FileInput(attrs={'class': 'form-control','id': 'image'}))
+        self.fields['image'] = forms.ImageField(widget=forms.FileInput(attrs={'class': 'form-control','id': 'image'}),required=False)
            

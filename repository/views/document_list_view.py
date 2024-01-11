@@ -3,9 +3,10 @@ from ..models import Document
 from django.core.paginator import Paginator
 from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView 
-
-
+from django.views.generic import ListView
+from django.utils.decorators import method_decorator
+from seguridad.Utils import admin_restriction 
+@method_decorator(admin_restriction, name='dispatch')
 class DocumentListViewByUser(LoginRequiredMixin, ListView):
     model = Document
     template_name = 'DocumentsByUser/DocumentsByUser.html'
@@ -21,7 +22,7 @@ class DocumentListViewByUser(LoginRequiredMixin, ListView):
         return documents_paginated
 
 
-
+@method_decorator(admin_restriction, name='dispatch')
 class DocumentListViewByTheme(View):
     
     items_per_page = 6
@@ -36,7 +37,7 @@ class DocumentListViewByTheme(View):
             documents_paginated = paginator.get_page(page_number)
         return render(request,'DocumentsByTheme/DocumentsByTheme.html', {'themes': themes, 'documents_paginated': documents_paginated})
     
-
+@method_decorator(admin_restriction, name='dispatch')
 class DocumentListViewByAuthor(ListView):
     model = Document
     template_name = 'DocumentsByAuthor/DocumentsByAuthor.html'
@@ -46,7 +47,7 @@ class DocumentListViewByAuthor(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         if not context['documents_paginated']:
-            context['message'] = "No se encontraron documentos"
+            context['message'] = "No se encontraron resultados"
         return context
 
     def get_queryset(self): # se ejecuta automaticamente al cargar la plantilla html

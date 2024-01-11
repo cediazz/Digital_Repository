@@ -2,7 +2,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import  DeleteView
 from ..models import Document
 from django.urls import reverse_lazy
-
+from django.utils.decorators import method_decorator
+from seguridad.Utils import admin_restriction
+@method_decorator(admin_restriction, name='dispatch')
 class DocumentDeleteView(LoginRequiredMixin,DeleteView):
     model = Document
     success_url = reverse_lazy('documents-byuser') #definir la URL a la que se redirigirá el usuario después de eliminar exitosamente un documento

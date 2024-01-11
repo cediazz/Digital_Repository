@@ -1,0 +1,14 @@
+asgiref==3.7.2
+autopep8==2.0.4
+beautifulsoup4==4.12.2
+Django==4.2.7
+Pillow==10.1.0
+psycopg2==2.9.9
+pycodestyle==2.11.1
+PyMuPDF==1.23.8
+PyMuPDFb==1.23.7
+soupsieve==2.5
+sqlparse==0.4.4
+tomli==2.0.1
+typing_extensions==4.8.0
+tzdata==2023.3

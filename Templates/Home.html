@@ -6,12 +6,12 @@
     <div class="p-5" >
       <div class="container-fluid py-5">
         <h1 class="display-5 fw-bold">Repositorio Digital de Documentos</h1>
-        <p class="col-md-8 fs-4">Guarde o descarge todo tipo de documentos en formato PDF</p>
+        <p class=" fs-4">Tenga acceso a un amplio Repositorio Digital de Documentos en formato PDF. Nuestro sitio le permite cargar, descargar, buscar y visualizar documentos en detalle con facilidad. Explore una amplia gama de documentos y encuentre la información que necesita de manera rápida y sencilla</p>
         <form method="get" action="{% url 'home' %}">
           {% csrf_token %}
           <div class="row g-3">
           <div class="col">
-            <input class="form-control" type="text" name="title" placeholder="Título del documento">
+            <input class="form-control" type="text" name="title" placeholder="Escriba una palabra clave" required data-bs-toggle="popover" title="Escriba una palabra clave referente al documento">
           </div>
           <div class="col">
             <button class="btn btn-primary" type="submit">
@@ -23,7 +23,7 @@
         </div>
       </form>
     </div>
-    
+    {% if documents_paginated %}
     <div class="container-fluid ">
       <h2 class="pb-2 border-bottom fw-bold ">Envíos recientes</h2>
       <div class="row mt-3 row-cols-1 row-cols-md-3 g-4">
@@ -69,6 +69,11 @@
       </ul>
       {% endif %}
     </nav>
+   {% elif message %}
+    <div class="alert alert-info d-flex justify-content-center align-items-center" role="alert">
+       {{message}}
+    </div>
+    {% endif %}
   </div>
   
   

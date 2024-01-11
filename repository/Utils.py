@@ -2,12 +2,12 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 import fitz
 from repo_tourism.settings import MEDIA_ROOT
-
+import os
+from django.core.exceptions import ValidationError
 
 #Validar que solo se suban documentos en PDF
 def validate_file_extension(value):
-    import os
-    from django.core.exceptions import ValidationError
+    
     ext = os.path.splitext(value.name)[1]  # Obtiene la extensión del archivo
     if ext.lower() != '.pdf':
         raise ValidationError(_('Solo se permiten archivos en formato PDF.'))
@@ -21,4 +21,4 @@ def save_image_pdf(file_name, pdf_file_path):
          pix.save(f"{MEDIA_ROOT}\Documents\{file_name}.png") # salvar la imagen en la carpeta designada para guardar los ficheros
         
     except Exception as e:
-         print("Error al procesar el archivo PDF:", e)
+          raise ValidationError(_(f'Ocurrió algun error procesando el documento PDF: {e}'))

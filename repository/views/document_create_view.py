@@ -4,7 +4,9 @@ from ..forms import DocumentForm
 import os.path
 from ..Utils import save_image_pdf
 from django.shortcuts import render
-
+from django.utils.decorators import method_decorator
+from seguridad.Utils import admin_restriction
+@method_decorator(admin_restriction, name='dispatch')
 class DocumentCreateView(LoginRequiredMixin,CreateView):
     #model = Document
     form_class = DocumentForm
