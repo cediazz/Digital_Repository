@@ -51,7 +51,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'repo_tourism.urls'
+ROOT_URLCONF = 'Digital_Repository.urls'
 
 TEMPLATES = [
     {
@@ -69,7 +69,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'repo_tourism.wsgi.application'
+WSGI_APPLICATION = 'Digital_Repository.wsgi.application'
 
 
 # Database

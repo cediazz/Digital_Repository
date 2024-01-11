@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from repo_tourism.settings import MEDIA_URL
+from Digital_Repository.settings import MEDIA_URL
 
 # Decorador que no permite acceder a una vista si hay un administrador logeado
 def admin_restriction(view_func):

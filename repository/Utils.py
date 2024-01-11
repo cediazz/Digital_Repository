@@ -1,7 +1,7 @@
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 import fitz
-from repo_tourism.settings import MEDIA_ROOT
+from Digital_Repository.settings import MEDIA_ROOT
 import os
 from django.core.exceptions import ValidationError
 
