@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView
 from django.utils.decorators import method_decorator
-from seguridad.Utils import admin_restriction 
+from security.Utils import admin_restriction 
 @method_decorator(admin_restriction, name='dispatch')
 class DocumentListViewByUser(LoginRequiredMixin, ListView):
     model = Document

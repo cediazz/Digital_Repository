@@ -4,7 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from ..models import Document
 from ..forms import DocumentForm
 from django.utils.decorators import method_decorator
-from seguridad.Utils import admin_restriction
+from security.Utils import admin_restriction
 @method_decorator(admin_restriction, name='dispatch')
 class DocumentUpdateView(LoginRequiredMixin,UpdateView):
     model = Document

@@ -1,5 +1,5 @@
 from django.db import models
-from seguridad.models import MyUser
+from security.models import MyUser
 from.Utils import validate_file_extension
 import os
 

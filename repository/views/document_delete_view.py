@@ -3,7 +3,7 @@ from django.views.generic import  DeleteView
 from ..models import Document
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
-from seguridad.Utils import admin_restriction
+from security.Utils import admin_restriction
 @method_decorator(admin_restriction, name='dispatch')
 class DocumentDeleteView(LoginRequiredMixin,DeleteView):
     model = Document

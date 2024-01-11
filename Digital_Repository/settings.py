@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'seguridad',
+    'security',
     'repository',
 ]
 
@@ -131,7 +131,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'Media')
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-AUTH_USER_MODEL = 'seguridad.MyUser'
+AUTH_USER_MODEL = 'security.MyUser'
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = 'login'

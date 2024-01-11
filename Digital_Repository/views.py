@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views import View
-from seguridad.Utils import admin_restriction
+from security.Utils import admin_restriction
 from django.utils.decorators import method_decorator
 from .settings import MEDIA_URL
 from repository.models import Document

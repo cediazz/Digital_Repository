@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('seguridad', '0002_myuser_groups_myuser_is_superuser_and_more'),
+        ('security', '0002_myuser_groups_myuser_is_superuser_and_more'),
     ]
 
     operations = [

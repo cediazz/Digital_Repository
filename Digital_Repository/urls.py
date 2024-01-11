@@ -19,12 +19,12 @@ from django.urls import path,include
 from .views import Home
 from django.conf import settings
 from django.conf.urls.static import static
-from django.contrib.auth.views import LoginView
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', Home.as_view(), name='home'),
-    path('Seguridad/', include('seguridad.urls')),
+    path('Seguridad/', include('security.urls')),
     path('Repositorys/', include('repository.urls')),
     
 ]
