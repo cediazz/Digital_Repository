@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os.path
 from pathlib import Path
+from decouple import config # Carga el archivo .env
+
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,7 +24,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-@9b+mr*ni(j+0sv6*&nuuk&ktpd1mbg&c)rvfg#4k!p_3k9(m6'
+SECRET_KEY = config('SECRET_KEY')
+"""La "SECRETKEY" se utiliza para crear hashes únicos y seguros, así como para cifrar y descifrar 
+información confidencial, lo que ayuda a prevenir ataques como la falsificación de solicitudes 
+entre sitios (CSRF) y la manipulación de cookies. Además, se utiliza para firmar y autenticar 
+sesiones de usuario, asegurando que las cookies de sesión no puedan ser manipuladas por terceros."""
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -77,12 +85,12 @@ WSGI_APPLICATION = 'Digital_Repository.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'repo_tourism',
-        'USER': 'postgres',
-        'PASSWORD':'Carlos',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+        'ENGINE': config('ENGINE'),
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('DB_HOST'),
+        'PORT': config('DB_PORT'),
     }
 }
 
@@ -109,7 +117,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es'
 
 TIME_ZONE = 'UTC'
 
@@ -135,4 +143,3 @@ AUTH_USER_MODEL = 'security.MyUser'
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = 'login'
-LANGUAGE_CODE = 'es'
