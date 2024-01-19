@@ -18,7 +18,10 @@ def save_image_pdf(file_name, pdf_file_path):
          pdf_document = fitz.open(pdf_file_path) # Leer el documento
          primera_pagina = pdf_document.load_page(0) # Extraer la imagen de la primera página del documento PDF
          pix = primera_pagina.get_pixmap() # Obtener una imagen de la primera pagina del documento
-         pix.save(f"{MEDIA_ROOT}\Documents\{file_name}.png") # salvar la imagen en la carpeta designada para guardar los ficheros
-        
+         pdf_path = os.path.join(MEDIA_ROOT, 'Documents') #Utilizamos os.path.join para construir la ruta de forma compatible con ambos sistemas
+         #pix.save(f"{MEDIA_ROOT}\Documents\{file_name}.png") # salvar la imagen en la carpeta designada para guardar los ficheros
+         image_path = os.path.join(pdf_path, f"{file_name}.png")
+         print(image_path)
+         pix.save(image_path)
     except Exception as e:
           raise ValidationError(_(f'Ocurrió algun error procesando el documento PDF: {e}'))
