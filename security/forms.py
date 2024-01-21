@@ -23,23 +23,25 @@ class UserPasswordChangeForm(PasswordChangeForm):
     )
 
 class UserUpdateForm(UserChangeForm):
-    class Meta(UserChangeForm.Meta):
+    class Meta():
         model = MyUser
         fields = ('username', 'image')
-    def __init__(self, *args, **kwargs):
-        super(UserUpdateForm, self).__init__(*args, **kwargs)
-        self.fields['username'] = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'username'}),max_length=15)
-        self.fields['image'] = forms.ImageField(widget=forms.FileInput(attrs={'class': 'form-control','id': 'image'}))
+        widgets = {
+            'username': forms.TextInput(attrs={'class': 'form-control', 'id': 'username'}),
+            'image': forms.FileInput(attrs={'class': 'form-control','id': 'image'})
+           }
+   
         
 
 class UserCreateForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = MyUser
         fields = ('username','image')
-    def __init__(self, *args, **kwargs):
-        super(UserCreateForm, self).__init__(*args, **kwargs)
-        self.fields['username'] = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'username'}),max_length=15)
-        self.fields['password1'] = forms.CharField(widget= forms.PasswordInput(attrs={'class': 'form-control','id': 'password1'}))
-        self.fields['password2'] = forms.CharField(widget= forms.PasswordInput(attrs={'class': 'form-control','id': 'password2'}))
-        self.fields['image'] = forms.ImageField(widget=forms.FileInput(attrs={'class': 'form-control','id': 'image'}),required=False)
+        widgets = {
+            'username': forms.TextInput(attrs={'class': 'form-control', 'id': 'username'}),
+            'image': forms.FileInput(attrs={'class': 'form-control','id': 'image'}),
+            }
+    password1 = forms.CharField(widget= forms.PasswordInput(attrs={'class': 'form-control','id': 'password1'}))
+    password2 = forms.CharField(widget= forms.PasswordInput(attrs={'class': 'form-control','id': 'password2'}))
+    
            
