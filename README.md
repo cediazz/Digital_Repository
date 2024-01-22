@@ -18,9 +18,9 @@ Activate the virtual environment and install the project dependencies with
 ````markdown
 pip install -r requirements.txt
 ````
-Set the environment variables to your needs in the .env file
+Create the .env file and place the environment variables you need
 ````markdown
-SECRET_KEY='django-insecure-@9b+mr*ni(j+0sv6*&nuuk&ktpd1mbg&c)rvfg#4k!p_3k9(m6'
+SECRET_KEY='your secret key'
 ENGINE='your database engine'
 DB_NAME=your database name
 DB_USER=your database user

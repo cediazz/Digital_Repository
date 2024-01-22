@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY')
+SECRET_KEY = config('SECRET_KEY') or 'django-insecure-@9b+mr*ni(j+0sv6*&nuuk&ktpd1mbg&c)rvfg#4k!p_3k9(m6'
 """La "SECRETKEY" se utiliza para crear hashes únicos y seguros, así como para cifrar y descifrar 
 información confidencial, lo que ayuda a prevenir ataques como la falsificación de solicitudes 
 entre sitios (CSRF) y la manipulación de cookies. Además, se utiliza para firmar y autenticar 
