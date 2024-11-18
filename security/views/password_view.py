@@ -1,11 +1,9 @@
-from django.utils.decorators import method_decorator
-from ..Utils import admin_restriction
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import PasswordChangeView,PasswordChangeDoneView
 from ..forms import UserPasswordChangeForm
 from django.urls import reverse_lazy
 
-@method_decorator(admin_restriction, name='dispatch')
+
 class CustomPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
     form_class = UserPasswordChangeForm
     template_name = 'Password/Password.html'
@@ -15,7 +13,6 @@ class CustomPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
         return reverse_lazy('done-password')
 
 
-@method_decorator(admin_restriction, name='dispatch')
 class CustomPasswordChangeDoneView(LoginRequiredMixin,PasswordChangeDoneView):
     template_name = 'Password/PasswordDone.html'
     
