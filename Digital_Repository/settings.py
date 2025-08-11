@@ -24,16 +24,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY') or 'django-insecure-@9b+mr*ni(j+0sv6*&nuuk&ktpd1mbg&c)rvfg#4k!p_3k9(m6'
-"""La "SECRETKEY" se utiliza para crear hashes únicos y seguros, así como para cifrar y descifrar 
-información confidencial, lo que ayuda a prevenir ataques como la falsificación de solicitudes 
-entre sitios (CSRF) y la manipulación de cookies. Además, se utiliza para firmar y autenticar 
-sesiones de usuario, asegurando que las cookies de sesión no puedan ser manipuladas por terceros."""
+SECRET_KEY = os.environ.get('SECRET_KEY', config('SECRET_KEY'))
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [os.environ.get('RENDER_EXTERNAL_HOSTNAME', '*')]
 
 
 # Application definition
@@ -85,12 +82,12 @@ WSGI_APPLICATION = 'Digital_Repository.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': config('ENGINE'),
-        'NAME': config('DB_NAME'),
-        'USER': config('DB_USER'),
-        'PASSWORD': config('DB_PASSWORD'),
-        'HOST': config('DB_HOST'),
-        'PORT': config('DB_PORT'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.environ.get('DB_NAME',config('DB_NAME')),
+        'USER': os.environ.get('DB_USER',config('DB_USER')),
+        'PASSWORD': os.environ.get('DB_PASSWORD',config('DB_PASSWORD')),
+        'HOST': os.environ.get('DB_HOST',config('DB_HOST')),
+        'PORT': os.environ.get('DB_PORT',config('DB_PORT')),
     }
 }
 
@@ -135,6 +132,7 @@ STATICFILES_DIRS = [
 ]
 MEDIA_URL = '/Media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'Media')
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 

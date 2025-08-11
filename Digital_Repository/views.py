@@ -1,13 +1,10 @@
 from django.shortcuts import render
 from django.views import View
-from security.Utils import admin_restriction
 from django.utils.decorators import method_decorator
 from .settings import MEDIA_URL
 from repository.models import Document
 from django.core.paginator import Paginator
 
-
-@method_decorator(admin_restriction, name='dispatch')
 class Home(View):
     template_name = 'Home.html'
     items_per_page = 6
