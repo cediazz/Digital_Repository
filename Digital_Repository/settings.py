@@ -13,7 +13,6 @@ import os.path
 from django.core.exceptions import ImproperlyConfigured
 from pathlib import Path
 from decouple import config # Carga el archivo .env
-import dj_database_url
 
 
 
@@ -81,12 +80,11 @@ WSGI_APPLICATION = 'Digital_Repository.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-DATABASE_NAME = os.environ.get('DB_NAME',config('DB_NAME'))
 DATABASES = {
-    'default': dj_database_url.config(
-        default=f'postgresql://postgres:postgres@localhost:5432/{DATABASE_NAME}',
-        conn_max_age=600
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
 
 
