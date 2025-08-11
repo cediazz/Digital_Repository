@@ -28,7 +28,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY', config('SECRET_KEY'))
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', True)
+print("DEBUG:",DEBUG)
 
 ALLOWED_HOSTS = [os.environ.get('RENDER_EXTERNAL_HOSTNAME', '*')]
 
