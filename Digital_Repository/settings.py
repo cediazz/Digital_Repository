@@ -13,7 +13,7 @@ import os.path
 from django.core.exceptions import ImproperlyConfigured
 from pathlib import Path
 from decouple import config # Carga el archivo .env
-
+import dj_database_url
 
 
 
@@ -49,6 +49,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -80,16 +81,12 @@ WSGI_APPLICATION = 'Digital_Repository.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
+DATABASE_NAME = os.environ.get('DB_NAME',config('DB_NAME'))
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ.get('DB_NAME',config('DB_NAME')),
-        'USER': os.environ.get('DB_USER',config('DB_USER')),
-        'PASSWORD': os.environ.get('DB_PASSWORD',config('DB_PASSWORD')),
-        'HOST': os.environ.get('DB_HOST',config('DB_HOST')),
-        'PORT': os.environ.get('DB_PORT',config('DB_PORT')),
-    }
+    'default': dj_database_url.config(
+        default=f'postgresql://postgres:postgres@localhost:5432/{DATABASE_NAME}',
+        conn_max_age=600
+    )
 }
 
 
@@ -128,9 +125,17 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+if not DEBUG:
+    # Tell Django to copy static assets into a path called `staticfiles` (this is specific to Render)
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+    # Enable the WhiteNoise storage backend, which compresses static files to reduce disk use
+    # and renames the files with unique names for each version to support long-term caching
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
+
 MEDIA_URL = '/Media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'Media')
 # Crear la carpeta Documents si no existe dentro de la carpeta Media
