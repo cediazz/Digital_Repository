@@ -112,7 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'es'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Havana'
 
 USE_I18N = True
 
@@ -130,9 +130,6 @@ if not DEBUG:
     # Enable the WhiteNoise storage backend, which compresses static files to reduce disk use
     # and renames the files with unique names for each version to support long-term caching
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
-]
 
 MEDIA_URL = '/Media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'Media')
