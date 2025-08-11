@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os.path
+from django.core.exceptions import ImproperlyConfigured
 from pathlib import Path
 from decouple import config # Carga el archivo .env
 
@@ -132,6 +133,15 @@ STATICFILES_DIRS = [
 ]
 MEDIA_URL = '/Media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'Media')
+# Crear la carpeta Documents si no existe dentro de la carpeta Media
+DOCUMENTS = os.path.join(MEDIA_ROOT,'Documents')
+try:
+    os.makedirs(DOCUMENTS, exist_ok=True)  
+    print(f"✓ Directorio '{DOCUMENTS}' creado/verificado.")
+except Exception as e:
+    raise ImproperlyConfigured(
+        f"Error al crear el directorio Documents: {str(e)}"
+    )
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
