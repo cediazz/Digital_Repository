@@ -7,7 +7,6 @@ certifi==2023.11.17
 charset-normalizer==3.3.2
 click==8.2.1
 colorama==0.4.6
-dj-database-url==3.0.1
 Django==4.2.7
 docutils==0.20.1
 gunicorn==23.0.0
